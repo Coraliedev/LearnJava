@@ -1,35 +1,26 @@
+import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
+
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) {
 
-        int[] numbers = {1, 2, 3, 4, 5};
-        try {
-            System.out.println(numbers[5]);
+        Timer chrono = new Timer();
+        chrono.schedule(new TimerTask() {
+            int time =5;
 
-        } catch (ArrayIndexOutOfBoundsException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            System.out.println(5 / 0);
-        } catch (ArithmeticException e) {
-            e.printStackTrace();
-        }
-
-        double balance = 1000;
-        double price = 1200;
-
-        try {
-            buy(balance, price);
-        } catch (NoMoneyException e) {
-            e.printStackTrace();
+            @Override
+            public void run() {
+                System.out.println("time: " + time + "s");
+                if (time == 0) {
+                    Random random = new Random();
+                    int randomInt = random.nextInt(6 - 1) + 1;
+                    System.out.println("value of dice: " + randomInt);
+                    chrono.cancel();
+                }
+                time--;
+            }},1000,1000);
         }
     }
-
-    private static void buy(double balance, double price) throws NoMoneyException {
-        if (balance < price) {
-            throw new NoMoneyException();
-        }
-    }
-}
