@@ -1,22 +1,30 @@
-import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
 
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) {
 
-        File source = new File("C:\\Users\\coral\\Desktop\\index.html");
-        File destination = new File("C:\\Users\\coral\\Desktop\\dossier1\\" + source.getName());
+        substract(5, 7, new CalculListener() {
+            @Override
+            public void onPositiveResult() {
+                System.out.println("Positive result");
+            }
 
-        try {
-            Files.copy(source.toPath(), destination.toPath(), StandardCopyOption.REPLACE_EXISTING);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+            @Override
+            public void onNegativeResult() {
+                System.out.println("Negative result");
+            }
+        });
+
+    }
+
+    private static void substract(int a, int b, CalculListener listener) {
+        int result = a - b;
+        System.out.println("Result: " + result);
+        if (result > 0) {
+            listener.onPositiveResult();
+        } else {
+            listener.onNegativeResult();
         }
-
-        source.delete();
-
     }
 }
