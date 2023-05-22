@@ -3,8 +3,16 @@
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) {
-        Player player = new Player("John");
-        player.sendMessage();
+        Account<Character> myAccount = new Account<>("John", 1000, '€');
+        myAccount.showBalance();
+
+        Account<String> otherAccount = new Account<>("Jane", 200, "euros");
+        otherAccount.showBalance();
+
+        Bank bank = new Bank("JohnBank");
+        bank.transferMoney(otherAccount, myAccount, 100);
+        myAccount.showBalance();
+        otherAccount.showBalance();
     }
 
 }
