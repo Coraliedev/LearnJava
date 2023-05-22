@@ -1,26 +1,49 @@
-import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) {
 
-        Timer chrono = new Timer();
-        chrono.schedule(new TimerTask() {
-            int time =5;
+        File folder = new File("C:\\Users\\coral\\Desktop\\dossier1");
 
-            @Override
-            public void run() {
-                System.out.println("time: " + time + "s");
-                if (time == 0) {
-                    Random random = new Random();
-                    int randomInt = random.nextInt(6 - 1) + 1;
-                    System.out.println("value of dice: " + randomInt);
-                    chrono.cancel();
-                }
-                time--;
-            }},1000,1000);
+        File file = new File("C:\\Users\\coral\\Desktop\\index.html");
+
+        if (!folder.exists()) {
+            boolean mkdir = folder.mkdir();
+        }
+
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            FileWriter writer;
+            try {
+                writer = new FileWriter(file);
+                BufferedWriter bw = new BufferedWriter(writer);
+                bw.write("""
+                        <!DOCTYPE html>
+                        <html lang="fr">
+                        <head>
+                            <meta charset="UTF-8">
+                            <title>Document</title>
+                        </head>
+                        <body>
+                            <h1>Index</h1>
+                            <body>
+                        """);
+                bw.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
         }
     }
+}
