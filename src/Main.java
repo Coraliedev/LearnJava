@@ -1,7 +1,5 @@
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
@@ -36,14 +34,21 @@ public class Main {
                         </head>
                         <body>
                             <h1>Index</h1>
-                            <body>
+                            </body>
+                        </html>
+                            
                         """);
                 bw.close();
+                BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8));
+                String line = reader.readLine();
+                while (line != null) {
+                    System.out.println(line);
+                    line = reader.readLine();
+                }
+                reader.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-
         }
     }
 }
